@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- 震动权限（100ms 短震动需要） -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Gugugaga">
+
+        <!--
+            主（且唯一）Activity
+
+            android:launchMode="singleInstance"
+                → 防止快速连续点击图标导致多次启动播放重叠
+                → 整个系统只存在此 Activity 的一个实例
+
+            android:theme="@style/Theme.Gugugaga.Transparent"
+                → 全透明主题，用户看不到任何界面
+
+            android:excludeFromRecents="true"
+                → 不出现在最近任务列表中
+
+            android:finishOnTaskLaunch="true"
+                → 从桌面重新启动时自动关闭旧实例
+
+            android:exported="true"
+                → 允许桌面启动器调用此 Activity
+        -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:launchMode="singleInstance"
+            android:theme="@style/Theme.Gugugaga.Transparent"
+            android:excludeFromRecents="true"
+            android:finishOnTaskLaunch="true"
+            android:stateNotNeeded="true">
+
+            <!-- 标准桌面启动器入口 -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
