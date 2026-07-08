@@ -15,40 +15,45 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Gugugaga">
 
-        <!--
-            主（且唯一）Activity
+        <!-- ═══════════════════════════════════════════════════
+             启动触发器 Activity
 
-            android:launchMode="singleInstance"
-                → 防止快速连续点击图标导致多次启动播放重叠
-                → 整个系统只存在此 Activity 的一个实例
+             Activity 只做一件事：启动 AudioPlayService 后立即 finish，
+             存活时间仅几毫秒，用户完全感知不到任何界面。
 
-            android:theme="@style/Theme.Gugugaga.Transparent"
-                → 全透明主题，用户看不到任何界面
+             android:theme="@style/Theme.Gugugaga.NoDisplay"
+               → 不绘制任何窗口，连启动预览闪屏都禁用
 
-            android:excludeFromRecents="true"
-                → 不出现在最近任务列表中
+             android:excludeFromRecents="true"
+               → 不出现在最近任务列表中
 
-            android:finishOnTaskLaunch="true"
-                → 从桌面重新启动时自动关闭旧实例
-
-            android:exported="true"
-                → 允许桌面启动器调用此 Activity
-        -->
+             android:finishOnTaskLaunch="true"
+               → 从桌面重新启动时自动关闭旧实例
+             ═══════════════════════════════════════════════════ -->
         <activity
             android:name=".MainActivity"
             android:exported="true"
             android:launchMode="singleInstance"
-            android:theme="@style/Theme.Gugugaga.Transparent"
+            android:theme="@style/Theme.Gugugaga.NoDisplay"
             android:excludeFromRecents="true"
             android:finishOnTaskLaunch="true"
             android:stateNotNeeded="true">
 
-            <!-- 标准桌面启动器入口 -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- ═══════════════════════════════════════════════════
+             后台音效播放服务
+
+             所有实际操作（震动 + 音频播放）都在此 Service 中执行。
+             无界面、无窗口，播完后自动销毁。
+             ═══════════════════════════════════════════════════ -->
+        <service
+            android:name=".AudioPlayService"
+            android:exported="false" />
     </application>
 
 </manifest>

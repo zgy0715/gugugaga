@@ -10,18 +10,16 @@
         <item name="colorOnSecondary">@color/black</item>
     </style>
 
-    <!-- 完全不可见主题：无任何 UI 元素 -->
-    <style name="Theme.Gugugaga.Transparent" parent="Theme.AppCompat.NoActionBar">
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowContentOverlay">@null</item>
-        <item name="android:backgroundDimEnabled">false</item>
-        <item name="android:windowAnimationStyle">@null</item>
-        <item name="android:windowDisablePreview">true</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
-        <item name="android:navigationBarColor">@android:color/transparent</item>
-        <item name="android:windowFullscreen">true</item>
-        <item name="android:colorBackgroundCacheHint">@null</item>
+    <!-- ═══════════════════════════════════════════════════════════════
+         完全无窗口主题
+
+         继承自 @android:style/Theme.NoDisplay（Android 原生主题），
+         系统层面跳过窗口创建，Activity 不获取任何窗口资源。
+
+         只在 Activity 继承自 Activity（而非 AppCompatActivity）时有效。
+         ═══════════════════════════════════════════════════════════════ -->
+    <style name="Theme.Gugugaga.NoDisplay" parent="@android:style/Theme.NoDisplay">
+        <!-- 不在最近任务列表显示 -->
+        <item name="android:excludeFromRecents">true</item>
     </style>
 </resources>
